@@ -7,14 +7,16 @@ LABEL copyright="Copyright 2018 Harry Y"
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt update && apt upgrade -y
-RUN apt install -y ubuntu-desktop
+# RUN apt install -y ubuntu-desktop
+RUN apt install -y --no-install-recommends ubuntu-desktop 
 
 # Base package for dev.
 RUN apt install -y build-essential
 RUN apt install -y cmake clang libicu-dev pkg-config
+RUN apt install -y openssh-server
 
 # You can comment out anything you don't need.
-RUN apt install -y git nodejs npm curl xclip 
+RUN apt install -y git nodejs npm curl wget xclip 
 RUN apt install -y emacs vim
 
 # The system should already have python/python3 at this point.
@@ -37,7 +39,6 @@ RUN mkdir -p "$GOPATH/src" "$GOPATH/bin" && chmod -R 777 "$GOPATH"
 # Install OpenJDK.
 RUN apt install -y default-jdk
 # Or, install Oracle JDK. 
-# Note that Oracle JDK11 is not free other than for development use.
 # (Oracle JDK cannot be installed in non-interactive mode.)
 # RUN apt install -y dialog apt-utils
 # RUN add-apt-repository -y ppa:linuxuprising/java
@@ -71,11 +72,24 @@ RUN tar -C /opt -xzf swift.tgz && rm swift.tgz
 ENV PATH /opt/swift-4.2-RELEASE-ubuntu18.04/usr/bin:$PATH
 
 # Install Rust
-# RUN wget -q https://static.rust-lang.org/rustup/dist/x86_64-unknown-linux-gnu/rustup-init
-# RUN chmod +x rustup-init && ./rustup-init -y && rm rustup-init
 RUN mkdir -p /opt/rust
 ENV RUSTUP_HOME /opt/rust
 ENV CARGO_HOME /opt/rust
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --no-modify-path
 RUN . /opt/rust/env
 
+# Install PosgresQL
+RUN apt install -y postgresql
+RUN service postgresql start
+
+# Install MongoDB
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4
+RUN echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.0 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-4.0.list
+RUN apt update && apt install -y mongodb-org
+RUN mkdir -p /data/db
+RUN mongod&
+
+# TBD: Create a user
+# adduser user
+
+EXPOSE 22 80 5432 27017
