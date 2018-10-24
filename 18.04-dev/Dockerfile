@@ -89,6 +89,9 @@ RUN apt update && apt install -y mongodb-org
 RUN mkdir -p /data/db
 RUN mongod&
 
+# Install VPN
+RUN apt install -y network-manager-openconnect-gnome
+
 # TBD: Create a user
 # adduser user
 

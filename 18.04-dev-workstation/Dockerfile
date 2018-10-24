@@ -1,16 +1,16 @@
 # Custom Ubuntu desktop version for developers.
 # It includes IDE tools and it runs VNC server for desktop access.
-FROM tinylinux/ubuntu-18.04:0.2.1-dev
+FROM tinylinux/ubuntu-18.04:0.2.2-dev
 LABEL imageName="Ubuntu Desktop workstation (amd64) for dev"
 LABEL copyright="Copyright 2018 Harry Y"
 
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt update && apt upgrade -y
-# RUN apt install -y xfce4 xfce4-goodies
 RUN apt install -y ubuntu-desktop gnome-panel gnome-settings-daemon metacity nautilus gnome-terminal
 RUN apt install -y libgconf-2-4
 
+RUN apt install -y firefox firefox-dev
 RUN apt install -y vlc imagemagick graphicsmagick gimp inkscape ghostscript blender
 
 # Install VS Code
@@ -33,7 +33,7 @@ ENV DISPLAY :0
 # RUN apt install -y tightvncserver
 RUN apt install -y vnc4server
 
-# Configure VNC server
+# TBD: Configure VNC server
 # RUN vncserver :1
 
-EXPOSE 22 80 5432 27017 5901
+EXPOSE 5901

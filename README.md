@@ -11,18 +11,18 @@ The `dev` image also comes with PostgreSQL and MongoDB installed (although they 
 
 You can find pre-built images on https://hub.docker.com/r/tinylinux/ubuntu-18.04/
 
-The name of the current dev image is `tinylinux/ubuntu-18.04:0.2.1-dev`.
+The name of the current dev image is `tinylinux/ubuntu-18.04:0.2.2-dev`.
 
 <!--
-docker build -f ./18.04-dev/Dockerfile -t tinylinux/ubuntu-18.04:0.2.1-dev .
-docker run -it -p 8000:80 -p 52022:22 -p 55432:5432 -p 57017:27017 --name ubuntu-18.04-dev <image_id>
-docker push tinylinux/ubuntu-18.04:0.2.1-dev
-docker run -it -p 8000:80 -p 52022:22 -p 55432:5432 -p 57017:27017 --name ubuntu-18.04-dev tinylinux/ubuntu-18.04:0.2.1-dev
+docker build -f ./18.04-dev/Dockerfile -t tinylinux/ubuntu-18.04:0.2.2-dev .
+docker run -it --rm -p 8000:80 -p 52022:22 -p 55432:5432 -p 57017:27017 --name ubuntu-18.04-dev <image_id>
+docker push tinylinux/ubuntu-18.04:0.2.2-dev
+docker run -it -p 8000:80 -p 52022:22 -p 55432:5432 -p 57017:27017 --name ubuntu-18.04-dev tinylinux/ubuntu-18.04:0.2.2-dev
 -->
 
 ```bash
-docker pull tinylinux/ubuntu-18.04:0.2.1-dev
-docker run -it -p 8000:80 -p 52022:22 -p 55432:5432 -p 57017:27017 --name my-dev-ubuntu tinylinux/ubuntu-18.04:0.2.1-dev
+docker pull tinylinux/ubuntu-18.04:0.2.2-dev
+docker run -it -p 8000:80 -p 52022:22 -p 55432:5432 -p 57017:27017 --name my-dev-ubuntu tinylinux/ubuntu-18.04:0.2.2-dev
 ```
 
 The first thing you may want to do after starting a container is to add a (non-sudo) user.
@@ -48,10 +48,6 @@ psql -h localhost -U postgres
 adduser user
 -->
 
-<!--
-apt install -y network-manager-openconnect-gnome
--->
-
 
 ## "Dev-Workstation" Image (Experimental)
 
@@ -60,18 +56,18 @@ The workstation image includes full ubuntu-desktop package
 
 You can find pre-built images on https://hub.docker.com/r/tinylinux/ubuntu-18.04/
 
-The name of the current dev image is `tinylinux/ubuntu-18.04:0.2.1-dev-workstation`.
+The name of the current dev image is `tinylinux/ubuntu-18.04:0.2.2-dev-workstation`.
 
 <!--
-docker build -f ./18.04-dev-workstation/Dockerfile -t tinylinux/ubuntu-18.04:0.2.1-dev-workstation .
-docker run -it -p 8000:80 -p 52022:22 -p 5901:5901 55432:5432 -p 57017:27017 --name ubuntu-18.04-workstation <image_id>
-docker push tinylinux/ubuntu-18.04:0.2.1-dev-workstation
-docker run -it -p 8000:80 -p 52022:22 -p 5901:5901 55432:5432 -p 57017:27017 --name ubuntu-18.04-workstation tinylinux/ubuntu-18.04:0.2.1-dev-workstation
+docker build -f ./18.04-dev-workstation/Dockerfile -t tinylinux/ubuntu-18.04:0.2.2-dev-workstation .
+docker run -it --rm -p 8000:80 -p 52022:22 -p 5901:5901 -p 55432:5432 -p 57017:27017 --name ubuntu-18.04-workstation <image_id>
+docker push tinylinux/ubuntu-18.04:0.2.2-dev-workstation
+docker run -it -p 8000:80 -p 52022:22 -p 5901:5901 -p 55432:5432 -p 57017:27017 --name ubuntu-18.04-workstation tinylinux/ubuntu-18.04:0.2.2-dev-workstation
 -->
 
 ```bash
-docker pull tinylinux/ubuntu-18.04:0.2.1-dev-workstation
-docker run -it -p 8000:80 -p 52022:22 -p 5901:5901 -p 55432:5432 -p 57017:27017 --name my-workstation-ubuntu tinylinux/ubuntu-18.04:0.2.1-dev-workstation
+docker pull tinylinux/ubuntu-18.04:0.2.2-dev-workstation
+docker run -it -p 8000:80 -p 52022:22 -p 5901:5901 -p 55432:5432 -p 57017:27017 --name my-workstation-ubuntu tinylinux/ubuntu-18.04:0.2.2-dev-workstation
 ```
 
 
@@ -84,5 +80,15 @@ and then create a new image.
 
 ```bash
 docker commit <container_id> <name>  
+```
+
+
+## What Packages are Included?
+
+In order to see what packages are currently installed in these packages,
+run the following command in the container:
+
+```bash
+apt list --installed
 ```
 
