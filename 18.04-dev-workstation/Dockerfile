@@ -1,21 +1,25 @@
 # Custom Ubuntu desktop version for developers.
 # It includes IDE tools and it runs VNC server for desktop access.
-FROM tinylinux/ubuntu-18.04:0.2.2-dev
+FROM tinylinux/ubuntu-18.04:0.2.3-dev
 LABEL imageName="Ubuntu Desktop workstation (amd64) for dev"
 LABEL copyright="Copyright 2018 Harry Y"
 
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt update && apt upgrade -y
-RUN apt install -y ubuntu-desktop gnome-panel gnome-settings-daemon metacity nautilus gnome-terminal
-RUN apt install -y libgconf-2-4
+RUN apt install -y ubuntu-desktop gnome-panel gnome-settings-daemon metacity nautilus gnome-terminal gedit
+RUN apt install -y libgconf-2-4 gconf2
 
 RUN apt install -y firefox firefox-dev
-RUN apt install -y vlc imagemagick graphicsmagick gimp inkscape ghostscript blender
+RUN apt install -y vlc imagemagick graphicsmagick gimp inkscape ghostscript blender pinta
 
 # Install VS Code
 RUN wget -q -O vscode.deb https://go.microsoft.com/fwlink/?LinkID=760868
 RUN dpkg -i vscode.deb && rm vscode.deb
+
+# Install Atom
+RUN wget -q -O atom.deb https://github.com/atom/atom/releases/download/v1.32.0/atom-amd64.deb
+RUN dpkg -i atom.deb && rm atom.deb
 
 # Install IntelliJ
 RUN wget -q -O intellij.tgz https://download.jetbrains.com/idea/ideaIC-2018.2.5.tar.gz
@@ -27,7 +31,7 @@ RUN wget -q -O eclipse.tgz http://mirrors.xmission.com/eclipse/technology/epp/do
 RUN tar -C /opt -xzf eclipse.tgz && rm eclipse.tgz
 ENV PATH /opt/eclipse:$PATH
 
-ENV DISPLAY :0
+ENV DISPLAY :1
 
 # Install VNC server
 # RUN apt install -y tightvncserver

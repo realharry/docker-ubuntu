@@ -16,7 +16,7 @@ RUN apt install -y cmake clang libicu-dev pkg-config
 RUN apt install -y openssh-server
 
 # You can comment out anything you don't need.
-RUN apt install -y git nodejs npm curl wget xclip 
+RUN apt install -y git nodejs npm curl wget xclip jq
 RUN apt install -y emacs vim
 
 # The system should already have python/python3 at this point.
@@ -78,6 +78,18 @@ ENV CARGO_HOME /opt/rust
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --no-modify-path
 RUN . /opt/rust/env
 
+# Install Typescript and other popular node lib/tools
+RUN npm i -g typescript
+RUN npm i -g angular create-react-app express-generator
+
+
+# Install SQLite
+RUN apt install -y sqlite3
+
+# Install Redis
+RUN apt install -y redis redis-tools
+# RUN redis-server -v &
+
 # Install PosgresQL
 RUN apt install -y postgresql
 RUN service postgresql start
@@ -87,7 +99,18 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75
 RUN echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.0 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-4.0.list
 RUN apt update && apt install -y mongodb-org
 RUN mkdir -p /data/db
-RUN mongod&
+# RUN mongod &
+
+# Install AWS SDK
+RUN apt install -y awscli
+# RUN aws configure
+
+# Install Google Cloud SDK
+RUN echo "deb http://packages.cloud.google.com/apt cloud-sdk-bionic main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+RUN curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+RUN apt update && apt install -y google-cloud-sdk
+# RUN gcloud init
+
 
 # Install VPN
 RUN apt install -y network-manager-openconnect-gnome
