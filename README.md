@@ -11,18 +11,18 @@ The `dev` image also comes with PostgreSQL and MongoDB installed (although they 
 
 You can find pre-built images on https://hub.docker.com/r/tinylinux/ubuntu-18.04/
 
-The name of the current dev image is `tinylinux/ubuntu-18.04:0.2.3-dev`.
+The name of the current dev image is `tinylinux/ubuntu-18.04:0.2.4-dev`.
 
 <!--
-docker build -f ./18.04-dev/Dockerfile -t tinylinux/ubuntu-18.04:0.2.3-dev .
+docker build -f ./18.04-dev/Dockerfile -t tinylinux/ubuntu-18.04:0.2.4-dev .
 docker run -it --rm -p 8000:80 -p 52022:22 -p 55432:5432 -p 57017:27017 --name ubuntu-18.04-dev <image_id>
-docker push tinylinux/ubuntu-18.04:0.2.3-dev
-docker run -it -p 8000:80 -p 52022:22 -p 55432:5432 -p 57017:27017 --name ubuntu-18.04-dev tinylinux/ubuntu-18.04:0.2.3-dev
+docker push tinylinux/ubuntu-18.04:0.2.4-dev
+docker run -it -p 8000:80 -p 52022:22 -p 55432:5432 -p 57017:27017 --name ubuntu-18.04-dev tinylinux/ubuntu-18.04:0.2.4-dev
 -->
 
 ```bash
-docker pull tinylinux/ubuntu-18.04:0.2.3-dev
-docker run -it -p 8000:80 -p 52022:22 -p 55432:5432 -p 57017:27017 --name my-dev-ubuntu tinylinux/ubuntu-18.04:0.2.3-dev
+docker pull tinylinux/ubuntu-18.04:0.2.4-dev
+docker run -it -p 8000:80 -p 52022:22 -p 55432:5432 -p 57017:27017 --name my-dev-ubuntu tinylinux/ubuntu-18.04:0.2.4-dev
 ```
 
 The first thing you may want to do after starting a container is to add a (non-sudo) user.
@@ -57,18 +57,18 @@ and it includes other GUI-based dev tools such as Eclipse, Gimp, etc.
 
 You can find pre-built images on https://hub.docker.com/r/tinylinux/ubuntu-18.04/
 
-The name of the current dev image is `tinylinux/ubuntu-18.04:0.2.3-dev-workstation`.
+The name of the current dev image is `tinylinux/ubuntu-18.04:0.2.4-dev-workstation`.
 
 <!--
-docker build -f ./18.04-dev-workstation/Dockerfile -t tinylinux/ubuntu-18.04:0.2.3-dev-workstation .
+docker build -f ./18.04-dev-workstation/Dockerfile -t tinylinux/ubuntu-18.04:0.2.4-dev-workstation .
 docker run -it --rm -p 8000:80 -p 52022:22 -p 5901:5901 -p 55432:5432 -p 57017:27017 --name ubuntu-18.04-workstation <image_id>
-docker push tinylinux/ubuntu-18.04:0.2.3-dev-workstation
-docker run -it -p 8000:80 -p 52022:22 -p 5901:5901 -p 55432:5432 -p 57017:27017 --name ubuntu-18.04-workstation tinylinux/ubuntu-18.04:0.2.3-dev-workstation
+docker push tinylinux/ubuntu-18.04:0.2.4-dev-workstation
+docker run -it -p 8000:80 -p 52022:22 -p 5901:5901 -p 55432:5432 -p 57017:27017 --name ubuntu-18.04-workstation tinylinux/ubuntu-18.04:0.2.4-dev-workstation
 -->
 
 ```bash
-docker pull tinylinux/ubuntu-18.04:0.2.3-dev-workstation
-docker run -it -p 8000:80 -p 52022:22 -p 5901:5901 -p 55432:5432 -p 57017:27017 --name my-workstation-ubuntu tinylinux/ubuntu-18.04:0.2.3-dev-workstation
+docker pull tinylinux/ubuntu-18.04:0.2.4-dev-workstation
+docker run -it -p 8000:80 -p 52022:22 -p 5901:5901 -p 55432:5432 -p 57017:27017 --name my-workstation-ubuntu tinylinux/ubuntu-18.04:0.2.4-dev-workstation
 ```
 
 
@@ -93,6 +93,6 @@ run the following command in the container:
 apt list --installed
 ```
 
-_Note: "0.2.3" refers to the version of the Dockerfiles, not the version of the images/artifacts. A (pseudo-) Dockerfile (in this repo) with the same version may produce different Docker images (possibly including different versions of packages/libraries)._
+_Note: "0.2.4" refers to the version of the Dockerfiles, not the version of the images/artifacts. A Dockerfile (in this repo) with the same version may produce different Docker images (possibly including different versions of packages/libraries)._
 _If you would like to create the same/reproducible image (as is normally done with Docker), then you'll need to modify the Dockerfiles to include specific package versions._
 _The versions/tags of the images on the Docker Hub, however, uniquely identify specific images._

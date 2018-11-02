@@ -1,6 +1,6 @@
 # Custom Ubuntu desktop version for developers.
 # It includes IDE tools and it runs VNC server for desktop access.
-FROM tinylinux/ubuntu-18.04:0.2.3-dev
+FROM tinylinux/ubuntu-18.04:0.2.4-dev
 LABEL imageName="Ubuntu Desktop workstation (amd64) for dev"
 LABEL copyright="Copyright 2018 Harry Y"
 

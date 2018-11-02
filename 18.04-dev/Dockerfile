@@ -79,8 +79,9 @@ RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --no-modify-path
 RUN . /opt/rust/env
 
 # Install Typescript and other popular node lib/tools
+RUN npm i -g npm@latest
 RUN npm i -g typescript
-RUN npm i -g angular create-react-app express-generator
+RUN npm i -g @angular/cli create-react-app express-generator
 
 
 # Install SQLite
